@@ -62,11 +62,8 @@ Human Ledger provides comprehensive tools for managing people, accounts, and tra
 ## Installation
 
 1. **Clone the repository**
-   ```bash
-   git clone https://github.com/<your-username>/HumanLedger.git
-   cd HumanLedger
 2. **Open the project**
-   - Open HumanLedger.sln in Visual Studio 2022
+   - Open TraqBankingApp.sln in Visual Studio 2022
 3. **Restore NuGet Packages**
    - dotnet restore
 4. **Build project**
@@ -76,7 +73,7 @@ Human Ledger provides comprehensive tools for managing people, accounts, and tra
 
 1. **Update connection string in appsettings.json **
 "ConnectionStrings": {
-  "DefaultConnection": "Server=YOUR_SERVER_NAME;Database=HumanLedgerDB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+  "DefaultConnection": "Server=YOUR_SERVER_NAME;Database=HumanLedgerDB;Trusted_Connection=True;TrustServerCertificate=True"
 }
 2. **Run Migrations**
    - dotnet ef database update
