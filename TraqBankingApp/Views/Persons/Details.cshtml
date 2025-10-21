@@ -1,0 +1,112 @@
+@model TraqBankingApp.Models.Person
+@{
+    ViewData["Title"] = "Person Details";
+}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">
+                <i class="bi bi-person-badge text-accent me-2" aria-hidden="true"></i>
+                Person Details
+            </h2>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.Code" class="btn btn-outline-primary">
+                    <i class="bi bi-pencil me-1" aria-hidden="true"></i> Edit Person
+                </a>
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-1" aria-hidden="true"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Person Information Card -->
+<div class="row mb-4">
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-navy text-black d-flex align-items-center">
+                <i class="bi bi-person-circle me-2" aria-hidden="true"></i>
+                <h5 class="mb-0">Personal Information</h5>
+            </div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-4 text-muted">
+                        <i class="bi bi-person me-2" aria-hidden="true"></i>Full Name
+                    </dt>
+                    <dd class="col-sm-8 fw-semibold">@Model.Name @Model.Surname</dd>
+
+                    <dt class="col-sm-4 text-muted">
+                        <i class="bi bi-card-text me-2" aria-hidden="true"></i>ID Number
+                    </dt>
+                    <dd class="col-sm-8 fw-semibold">@Model.IdNumber</dd>
+                </dl>
+            </div>
+            <div class="card-footer bg-light border-0">
+                <a class="btn btn-accent" asp-controller="Accounts" asp-action="Create" asp-route-personId="@Model.Code">
+                    <i class="bi bi-plus-circle me-1" aria-hidden="true"></i> Add New Account
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Accounts Section -->
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-navy text-black d-flex align-items-center justify-content-between">
+                <div>
+                    <i class="bi bi-bank me-2" aria-hidden="true"></i>
+                    <h5 class="d-inline mb-0">Accounts</h5>
+                    <span class="badge bg-accent ms-2">@Model.Accounts.Count()</span>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                @if (Model.Accounts.Any())
+                {
+                    <div class="list-group list-group-flush">
+                        @foreach (var a in Model.Accounts)
+                        {
+                            <div class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">
+                                            <i class="bi bi-credit-card-2-front text-accent me-2" aria-hidden="true"></i>
+                                            Account #@a.AccountNumber
+                                        </h6>
+                                        <p class="mb-0 text-muted small">
+                                            <i class="bi bi-cash-stack me-1" aria-hidden="true"></i>
+                                            Balance: <span class="fw-bold text-dark">R @a.OutstandingBalance.ToString("N2")</span>
+                                        </p>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Account actions">
+                                        <a asp-controller="Accounts" asp-action="Details" asp-route-id="@a.Code"
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-eye me-1" aria-hidden="true"></i> Details
+                                        </a>
+                                        <a asp-controller="Accounts" asp-action="Edit" asp-route-id="@a.Code"
+                                           class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-pencil me-1" aria-hidden="true"></i> Edit
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center py-5">
+                        <i class="bi bi-inbox text-muted" style="font-size: 3rem;" aria-hidden="true"></i>
+                        <p class="text-muted mt-3">No accounts found for this person.</p>
+                        <a class="btn btn-accent" asp-controller="Accounts" asp-action="Create" asp-route-personId="@Model.Code">
+                            <i class="bi bi-plus-circle me-1" aria-hidden="true"></i> Create First Account
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

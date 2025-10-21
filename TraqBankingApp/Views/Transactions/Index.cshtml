@@ -1,0 +1,132 @@
+@model IEnumerable<TraqBankingApp.Models.TransactionEntry>
+@{
+    ViewData["Title"] = "Transactions";
+    var account = (TraqBankingApp.Models.Account)ViewBag.Account;
+}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
+            <div>
+                <h2 class="mb-1">
+                    <i class="bi bi-receipt text-accent me-2" aria-hidden="true"></i>
+                    Transactions
+                </h2>
+                <p class="text-muted mb-0">
+                    <i class="bi bi-credit-card-2-front me-1" aria-hidden="true"></i>
+                    Account: <span class="tb-mono">@account.AccountNumber</span>
+                    @if (account.Status?.Name == "Open")
+                    {
+                        <span class="badge bg-success ms-2">
+                            <i class="bi bi-check-circle me-1" aria-hidden="true"></i>
+                            @account.Status.Name
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary ms-2">
+                            <i class="bi bi-x-circle me-1" aria-hidden="true"></i>
+                            @account.Status?.Name
+                        </span>
+                    }
+                </p>
+            </div>
+            <div class="d-flex gap-2">
+                <a asp-controller="Accounts" asp-action="Details" asp-route-id="@account.Code" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-1" aria-hidden="true"></i> Back to Account
+                </a>
+                <a class="btn btn-accent" asp-action="Create" asp-route-accountId="@account.Code">
+                    <i class="bi bi-plus-circle me-1" aria-hidden="true"></i> Add Transaction
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        @if (Model.Any())
+        {
+            <div class="tb-table-wrapper">
+                <table class="table table-modern table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>
+                                <i class="bi bi-calendar-event me-1" aria-hidden="true"></i>
+                                Transaction Date
+                            </th>
+                            <th>
+                                <i class="bi bi-calendar-check me-1" aria-hidden="true"></i>
+                                Capture Date
+                            </th>
+                            <th>
+                                <i class="bi bi-currency-dollar me-1" aria-hidden="true"></i>
+                                Amount
+                            </th>
+                            <th>
+                                <i class="bi bi-card-text me-1" aria-hidden="true"></i>
+                                Description
+                            </th>
+                            <th class="table-actions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var t in Model.OrderByDescending(x => x.TransactionDate))
+                        {
+                            <tr>
+                                <td>
+                                    <span class="fw-semibold">@t.TransactionDate.ToString("dd MMM yyyy")</span>
+                                </td>
+                                <td class="text-muted small">
+                                    @t.CaptureDate.ToString("dd MMM yyyy HH:mm")
+                                </td>
+                                <td>
+                                    <span class="fw-bold @(t.Amount >= 0 ? "text-success" : "text-danger")">
+                                        @(t.Amount >= 0 ? "+" : "")R @Math.Abs(t.Amount).ToString("N2")
+                                    </span>
+                                </td>
+                                <td>@t.Description</td>
+                                <td class="table-actions">
+                                    <div class="tb-action-group">
+                                        <a asp-action="Details" asp-route-id="@t.Code"
+                                           class="btn btn-sm btn-outline-primary"
+                                           title="View transaction details">
+                                            <i class="bi bi-eye me-1" aria-hidden="true"></i> Details
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@t.Code"
+                                           class="btn btn-sm btn-outline-secondary"
+                                           title="Edit transaction">
+                                            <i class="bi bi-pencil me-1" aria-hidden="true"></i> Edit
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="card shadow-sm border-0">
+                <div class="card-body tb-empty">
+                    <div class="tb-empty-illustration">
+                        <i class="bi bi-inbox" style="font-size: 4rem;" aria-hidden="true"></i>
+                    </div>
+                    <h4 class="tb-empty-title">No Transactions Found</h4>
+                    <p class="tb-empty-text">
+                        This account doesn't have any transactions yet.
+                    </p>
+                    <div class="tb-empty-actions">
+                        <a class="btn btn-accent" asp-action="Create" asp-route-accountId="@account.Code">
+                            <i class="bi bi-plus-circle me-1" aria-hidden="true"></i> Add First Transaction
+                        </a>
+                        <a asp-controller="Accounts" asp-action="Details" asp-route-id="@account.Code" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-1" aria-hidden="true"></i> Back to Account
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,137 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="text-center mb-4">
+            <h1 class="display-5 fw-bold">
+                <i class="bi bi-info-circle text-accent me-2" aria-hidden="true"></i>
+                About Human Ledger
+            </h1>
+            <p class="lead text-muted">Financial management made simple</p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- What It Does -->
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-navy text-black">
+                <i class="bi bi-lightbulb me-2" aria-hidden="true"></i>
+                <h5 class="d-inline mb-0">What It Does</h5>
+            </div>
+            <div class="card-body">
+                <p class="mb-3">
+                    Human Ledger is a financial management system designed to streamline the way you manage people, accounts, and transactions.
+                </p>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="bi bi-check-circle-fill text-success me-2" aria-hidden="true"></i>
+                        <strong>Person Management:</strong> Store and organize individual profiles
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-check-circle-fill text-success me-2" aria-hidden="true"></i>
+                        <strong>Account Tracking:</strong> Monitor multiple accounts per person with real-time balances
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-check-circle-fill text-success me-2" aria-hidden="true"></i>
+                        <strong>Transaction History:</strong> Complete audit trail of all financial activities
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-navy text-black">
+                <i class="bi bi-stack me-2" aria-hidden="true"></i>
+                <h5 class="d-inline mb-0">Technology Stack</h5>
+            </div>
+            <div class="card-body">
+                <p class="mb-3">Built with modern, industry-standard technologies:</p>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-code-square text-accent fs-4 me-3" aria-hidden="true"></i>
+                            <div>
+                                <h6 class="mb-1">Backend</h6>
+                                <p class="small text-muted mb-0">ASP.NET Core 9.0 MVC with C# 13.0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-database text-accent fs-4 me-3" aria-hidden="true"></i>
+                            <div>
+                                <h6 class="mb-1">Database</h6>
+                                <p class="small text-muted mb-0">Entity Framework Core with SQL Server</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-palette text-accent fs-4 me-3" aria-hidden="true"></i>
+                            <div>
+                                <h6 class="mb-1">Frontend</h6>
+                                <p class="small text-muted mb-0">Bootstrap 5, Razor Views, Custom CSS</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-shield-lock text-accent fs-4 me-3" aria-hidden="true"></i>
+                            <div>
+                                <h6 class="mb-1">Security</h6>
+                                <p class="small text-muted mb-0">Cookie Authentication, Password Hashing</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Designer Info -->
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-navy text-black">
+                <i class="bi bi-person-badge me-2" aria-hidden="true"></i>
+                <h5 class="d-inline mb-0">Developer Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h4 class="mb-3">
+                            <i class="bi bi-star-fill text-accent me-2" aria-hidden="true"></i>
+                            Alicia Reddy
+                        </h4>
+                        <p class="lead mb-3">
+                            Software developer passionate about creating modern, user-friendly solutions to make your business more efficient.
+                        </p>
+                        <p class="text-muted">
+                            This project shows my experience with web development, clean architecture,
+                            and attention to user experience design. Built with scalability and maintainability in mind.
+                        </p>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <div class="p-4 bg-soft rounded">
+                            <i class="bi bi-code-slash text-accent" style="font-size: 4rem;" aria-hidden="true"></i>
+                            <p class="mt-3 mb-0 fw-semibold">Crafted with care</p>
+                        </div>
+                    </div>
+                </div> 
+                <hr class="my-4" />
+                <div class="text-center">
+                    <a href="@Url.Action("Contact", "Home")" class="btn btn-accent">
+                        <i class="bi bi-envelope me-2" aria-hidden="true"></i>
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

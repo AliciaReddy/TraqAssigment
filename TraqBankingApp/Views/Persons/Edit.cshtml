@@ -1,0 +1,63 @@
+@model TraqBankingApp.Models.Person
+@{
+    ViewData["Title"] = "Edit Person";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-navy text-black">
+                <i class="bi bi-pencil me-2" aria-hidden="true"></i>
+                <h5 class="d-inline mb-0">Edit Person</h5>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="Code" />
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="mb-4">
+                        <label asp-for="Name" class="form-label fw-semibold">
+                            <i class="bi bi-person me-1 text-accent" aria-hidden="true"></i>
+                            First Name
+                        </label>
+                        <input asp-for="Name" class="form-control form-control-lg" />
+                        <span asp-validation-for="Name" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Surname" class="form-label fw-semibold">
+                            <i class="bi bi-person me-1 text-accent" aria-hidden="true"></i>
+                            Surname
+                        </label>
+                        <input asp-for="Surname" class="form-control form-control-lg" />
+                        <span asp-validation-for="Surname" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="IdNumber" class="form-label fw-semibold">
+                            <i class="bi bi-card-text me-1 text-accent" aria-hidden="true"></i>
+                            ID Number
+                        </label>
+                        <input asp-for="IdNumber" class="form-control form-control-lg" required />
+                        <span asp-validation-for="IdNumber" class="text-danger small"></span>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-accent">
+                            <i class="bi bi-check-circle me-1" aria-hidden="true"></i>
+                            Save Changes
+                        </button>
+                        <a asp-action="Details" asp-route-id="@Model.Code" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle me-1" aria-hidden="true"></i>
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

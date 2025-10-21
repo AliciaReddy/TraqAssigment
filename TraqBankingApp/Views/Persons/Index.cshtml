@@ -1,0 +1,129 @@
+@model IEnumerable<TraqBankingApp.Models.Person>
+@{
+    ViewData["Title"] = "People";
+    var search = (string?)ViewBag.Search ?? string.Empty;
+    var totalPages = (int)(ViewBag.TotalPages ?? 1);
+    var currentPage = (int)(ViewBag.CurrentPage ?? 1);
+    bool hasResults = Model?.Any() == true;
+}
+
+<section class="tb-persons-page">
+    <header class="tb-page-header">
+        <div class="tb-page-title">
+            <h1 class="tb-title">People</h1>
+            <p class="tb-subtitle">Manage customer records and linked accounts</p>
+        </div>
+
+        <div class="tb-page-actions">
+            <form method="get" class="tb-search" role="search" aria-label="Search people">
+                <div class="input-group">
+                    <span class="input-group-text" id="search-label" aria-hidden="true">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text"
+                           name="search"
+                           value="@search"
+                           class="form-control"
+                           placeholder="Search by ID or surname"
+                           aria-label="Search"
+                           aria-describedby="search-label" />
+                    <button class="btn tb-btn tb-btn--primary" type="submit">
+                        <i class="bi bi-funnel me-1" aria-hidden="true"></i> Search
+                    </button>
+                </div>
+            </form>
+            <a class="btn tb-btn tb-btn--accent" asp-action="Create">
+                <i class="bi bi-person-plus me-1" aria-hidden="true"></i> Add Person
+            </a>
+        </div>
+    </header>
+
+    <div class="tb-card">
+        @if (hasResults)
+        {
+            <div class="table-responsive tb-table-wrapper">
+                <table class="table table-hover table-striped table-modern table-sticky align-middle tb-table">
+                    <colgroup>
+                        <col style="width:25%">
+                        <col style="width:25%">
+                        <col style="width:35%">
+                        <col style="width:15%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">ID Number</th>
+                            <th scope="col" class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in Model!)
+                        {
+                            <tr>
+                                <td>@p.Name</td>
+                                <td>@p.Surname</td>
+                                <td><span class="tb-mono">@p.IdNumber</span></td>
+                                <td class="text-end table-actions">
+                                    <div class="btn-group tb-action-group" role="group" aria-label="Row actions">
+                                        <a class="btn btn-icon btn-icon-ghost me-1"
+                                           asp-action="Details"
+                                           asp-route-id="@p.Code"
+                                           title="Details" aria-label="Details">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <a class="btn btn-icon btn-icon-ghost me-1"
+                                           asp-action="Edit"
+                                           asp-route-id="@p.Code"
+                                           title="Edit" aria-label="Edit">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a class="btn btn-icon btn-icon-ghost text-danger"
+                                           asp-action="Delete"
+                                           asp-route-id="@p.Code"
+                                           title="Delete" aria-label="Delete">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="tb-empty">
+                <div class="tb-empty-illustration" aria-hidden="true">
+                    <i class="bi bi-search fs-1"></i>
+                </div>
+                <h2 class="tb-empty-title">No people found</h2>
+                <p class="tb-empty-text">Try adjusting your search or add a new person.</p>
+                <div class="tb-empty-actions">
+                    <a class="btn tb-btn tb-btn--accent" asp-action="Create">
+                        <i class="bi bi-person-plus me-1" aria-hidden="true"></i> Add Person
+                    </a>
+                    <a class="btn tb-btn tb-btn--ghost" href="?">
+                        <i class="bi bi-x-circle me-1" aria-hidden="true"></i> Clear Search
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (totalPages > 1)
+    {
+        <nav class="tb-pagination-nav" aria-label="Persons pagination">
+            <ul class="pagination tb-pagination">
+                @for (int i = 1; i <= totalPages; i++)
+                {
+                    var isActive = currentPage == i;
+                    <li class="page-item @(isActive ? "active" : "")" aria-current="@(isActive ? "page" : null)">
+                        <a class="page-link" href="?page=@i&search=@search">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+</section>

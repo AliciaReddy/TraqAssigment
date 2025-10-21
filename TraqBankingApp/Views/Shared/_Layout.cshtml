@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Human Ledger</title>
+    <meta name="theme-color" content="#0a2342" />
+    <meta name="color-scheme" content="light only" />
+    <script type="importmap"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TraqBankingApp.styles.css" asp-append-version="true" />
+</head>
+<body class="bg-soft pattern subtle-fade-in">
+    <a class="visually-hidden-focusable skip-link" href="#mainContent">Skip to content</a>
+
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-navy glass-nav border-bottom border-0 shadow-sm">
+            <div class="container-xxl">
+                <a class="navbar-brand fw-bold d-flex align-items-center gap-2 brand-glow" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-people-fill text-accent fs-4" aria-hidden="true"></i>
+                    <span>Human Ledger</span>
+                </a>
+
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div id="mainNav" class="collapse navbar-collapse">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link link-underline px-3" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house-door me-1" aria-hidden="true"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link link-underline px-3" asp-area="" asp-controller="Persons" asp-action="Index">
+                                <i class="bi bi-people me-1" aria-hidden="true"></i> People
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link link-underline px-3" asp-area="" asp-controller="Home" asp-action="About">
+                                <i class="bi bi-info-circle me-1" aria-hidden="true"></i> About
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link link-underline px-3" asp-area="" asp-controller="Home" asp-action="Contact">
+                                <i class="bi bi-envelope me-1" aria-hidden="true"></i> Contact
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav align-items-center">
+                        @if (User?.Identity?.IsAuthenticated ?? false)
+                        {
+                            <li class="nav-item">
+                                <span class="navbar-text me-2 small text-accent">
+                                    <i class="bi bi-person-circle me-1" aria-hidden="true"></i>
+                                    Hello @User.Identity!.Name
+                                </span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-sm btn-outline-accent ms-lg-2" asp-controller="Auth" asp-action="Logout">
+                                    <i class="bi bi-box-arrow-right me-1" aria-hidden="true"></i> Logout
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-sm btn-outline-accent me-2" asp-controller="Auth" asp-action="Signup">
+                                    <i class="bi bi-person-plus me-1" aria-hidden="true"></i> Sign Up
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-sm btn-accent" asp-controller="Auth" asp-action="Login">
+                                    <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i> Login
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="w-100 deco-accent-strip"></div>
+    </header>
+
+    <div class="container-xxl">
+        <main id="mainContent" role="main" class="py-4 animate-fade-up">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer-modern mt-auto border-0">
+        <div class="container-xxl d-flex flex-column flex-sm-row justify-content-between align-items-center py-3 gap-2">
+            <div class="text-light-70 small">
+                &copy; 2025 - Human Ledger
+            </div>
+            <div class="small">
+                <a class="footer-link me-3" asp-area="" asp-controller="Home" asp-action="Privacy">
+                    <i class="bi bi-shield-lock me-1" aria-hidden="true"></i> Privacy
+                </a>
+                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="Contact">
+                    <i class="bi bi-chat-dots me-1" aria-hidden="true"></i> Support
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top functionality-->
+    <button id="backToTop" class="btn btn-accent back-to-top" type="button" aria-label="Back to top">
+        <i class="bi bi-arrow-up-short fs-4" aria-hidden="true"></i>
+    </button>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        (function () {
+            const toTop = document.getElementById('backToTop');
+            const revealTargets = Array.from(document.querySelectorAll('.card, table, form, .list-group, .alert'));
+
+            function onScroll() {
+                if (window.scrollY > 240) {
+                    toTop.classList.add('show');
+                } else {
+                    toTop.classList.remove('show');
+                }
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+            const io = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('reveal-in');
+                        io.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.08 }) : null;
+
+            revealTargets.forEach(el => {
+                el.classList.add('reveal');
+                if (io) io.observe(el);
+            });
+        })();
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,169 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    .hero-section {
+        position: relative;
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url('/images/banking.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-bottom: 2rem;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(10, 35, 66, 0.92) 0%, rgba(10, 35, 66, 0.85) 100%);
+        backdrop-filter: blur(2px);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: white;
+        padding: 3rem 1.5rem;
+        max-width: 900px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 0.8s ease-out;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1.1rem, 2vw, 1.5rem);
+        font-weight: 300;
+        margin-bottom: 2rem;
+        opacity: 0.95;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .hero-cta {
+        animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+        .hero-cta .btn {
+            padding: 0.9rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 8px 25px rgba(255, 209, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+
+            .hero-cta .btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 12px 35px rgba(255, 209, 102, 0.4);
+            }
+
+    .accent-glow {
+        color: var(--color-yellow);
+        text-shadow: 0 0 20px rgba(255, 209, 102, 0.5);
+        display: block;
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .feature-highlight {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 209, 102, 0.2);
+        border-radius: var(--radius-sm);
+        padding: 1rem 1.5rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 1rem;
+        animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+</style>
+
+<div class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">
+            Welcome to
+            <span class="accent-glow">Human Ledger</span>
+        </h1>
+        <p class="hero-subtitle">
+            Your financial management center. Seamlessly manage people, accounts, and transactions.
+        </p>
+        <div class="hero-cta">
+            <a asp-controller="Persons" asp-action="Index" class="btn btn-accent btn-lg me-2 mb-2">
+                <i class="bi bi-people-fill me-2" aria-hidden="true"></i>
+                Get Started
+            </a>
+            <a asp-controller="Home" asp-action="About" class="btn btn-outline-light btn-lg mb-2">
+                <i class="bi bi-info-circle me-2" aria-hidden="true"></i>
+                Learn More
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="row g-4 mt-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100 text-center">
+            <div class="card-body p-4">
+                <div class="mb-3">
+                    <i class="bi bi-people-fill text-accent" style="font-size: 3rem;" aria-hidden="true"></i>
+                </div>
+                <h5 class="card-title">Person Management</h5>
+                <p class="card-text text-muted">
+                    Organize and track individuals with profile management.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100 text-center">
+            <div class="card-body p-4">
+                <div class="mb-3">
+                    <i class="bi bi-bank text-accent" style="font-size: 3rem;" aria-hidden="true"></i>
+                </div>
+                <h5 class="card-title">Account Tracking</h5>
+                <p class="card-text text-muted">
+                    Monitor multiple accounts per person with real-time balance updates and status management.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100 text-center">
+            <div class="card-body p-4">
+                <div class="mb-3">
+                    <i class="bi bi-receipt text-accent" style="font-size: 3rem;" aria-hidden="true"></i>
+                </div>
+                <h5 class="card-title">Transaction History</h5>
+                <p class="card-text text-muted">
+                    Complete audit trail of all financial activities with detailed transaction records.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

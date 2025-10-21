@@ -1,0 +1,110 @@
+@model TraqBankingApp.ViewModels.SignUpInput
+@{
+    ViewData["Title"] = "Sign Up";
+}
+
+<style>
+    .auth-header {
+        position: relative;
+        background-image: url('/images/banking.jpg');
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+    }
+
+    .auth-header-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(10, 35, 66, 0.95) 0%, rgba(10, 35, 66, 0.88) 100%);
+        backdrop-filter: blur(2px);
+    }
+
+    .auth-header-content {
+        position: relative;
+        z-index: 2;
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+        <div class="card shadow-lg border-0 mb-5">
+            <div class="card-header auth-header text-white text-center py-4">
+                <div class="auth-header-overlay"></div>
+                <div class="auth-header-content">
+                    <i class="bi bi-person-plus-fill text-accent fs-1 mb-3 d-block" aria-hidden="true"></i>
+                    <h3 class="mb-0 fw-bold">Create Account</h3>
+                    <p class="mb-0 small opacity-75 mt-2">Join Human Ledger today</p>
+                </div>
+            </div>
+            <div class="card-body p-4 p-md-5">
+                <form asp-action="Signup" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <!-- Username -->
+                    <div class="mb-4">
+                        <label asp-for="Username" class="form-label fw-semibold">
+                            <i class="bi bi-person me-1 text-accent" aria-hidden="true"></i>
+                            Username
+                        </label>
+                        <input asp-for="Username" class="form-control form-control-lg" placeholder="Choose a username" autofocus />
+                        <span class="text-danger small" asp-validation-for="Username"></span>
+                        <small class="form-text text-muted d-block mt-1">
+                            <i class="bi bi-info-circle me-1" aria-hidden="true"></i>
+                            3-100 characters
+                        </small>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-4">
+                        <label asp-for="Password" class="form-label fw-semibold">
+                            <i class="bi bi-lock me-1 text-accent" aria-hidden="true"></i>
+                            Password
+                        </label>
+                        <input asp-for="Password" class="form-control form-control-lg" type="password" placeholder="Create a strong password" />
+                        <span class="text-danger small" asp-validation-for="Password"></span>
+                        <small class="form-text text-muted d-block mt-1">
+                            <i class="bi bi-info-circle me-1" aria-hidden="true"></i>
+                            Minimum 6 characters
+                        </small>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="mb-4">
+                        <label asp-for="ConfirmPassword" class="form-label fw-semibold">
+                            <i class="bi bi-shield-check me-1 text-accent" aria-hidden="true"></i>
+                            Confirm Password
+                        </label>
+                        <input asp-for="ConfirmPassword" class="form-control form-control-lg" type="password" placeholder="Re-enter your password" />
+                        <span class="text-danger small" asp-validation-for="ConfirmPassword"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-grid gap-2 mb-3">
+                        <button type="submit" class="btn btn-accent btn-lg py-3 fw-semibold">
+                            <i class="bi bi-person-plus me-2" aria-hidden="true"></i>
+                            Create Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer bg-light text-center py-3">
+                <small class="text-muted">
+                    Already have an account?
+                    <a asp-controller="Auth" asp-action="Login" class="fw-semibold text-decoration-none">
+                        Login here
+                        <i class="bi bi-arrow-right small" aria-hidden="true"></i>
+                    </a>
+                </small>
+            </div>
+        </div>
+
+        <div class="text-center text-muted small">
+            <i class="bi bi-shield-lock me-1" aria-hidden="true"></i>
+            Your data is secure and encrypted
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

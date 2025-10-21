@@ -1,0 +1,66 @@
+@model TraqBankingApp.Models.Person
+@{
+    ViewData["Title"] = "Create Person";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-navy text-black">
+                <i class="bi bi-person-plus me-2" aria-hidden="true"></i>
+                <h5 class="d-inline mb-0">Create New Person</h5>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="mb-4">
+                        <label asp-for="Name" class="form-label fw-semibold">
+                            <i class="bi bi-person me-1 text-accent" aria-hidden="true"></i>
+                            First Name
+                        </label>
+                        <input asp-for="Name" class="form-control form-control-lg" placeholder="Enter first name" />
+                        <span asp-validation-for="Name" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Surname" class="form-label fw-semibold">
+                            <i class="bi bi-person me-1 text-accent" aria-hidden="true"></i>
+                            Surname
+                        </label>
+                        <input asp-for="Surname" class="form-control form-control-lg" placeholder="Enter surname" />
+                        <span asp-validation-for="Surname" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="IdNumber" class="form-label fw-semibold">
+                            <i class="bi bi-card-text me-1 text-accent" aria-hidden="true"></i>
+                            ID Number
+                        </label>
+                        <input asp-for="IdNumber" class="form-control form-control-lg" placeholder="Enter ID number" required />
+                        <span asp-validation-for="IdNumber" class="text-danger small"></span>
+                        <small class="form-text text-muted">
+                            <i class="bi bi-info-circle me-1" aria-hidden="true"></i>
+                            Must be unique
+                        </small>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-accent">
+                            <i class="bi bi-check-circle me-1" aria-hidden="true"></i>
+                            Create Person
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle me-1" aria-hidden="true"></i>
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
